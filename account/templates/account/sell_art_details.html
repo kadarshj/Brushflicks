@@ -1,0 +1,67 @@
+{% extends 'basedash.html' %}
+{% load staticfiles %}
+{% block title %}Art Details{% endblock %}
+{% block post_home %}active{% endblock %}
+{% block post_homeee %}active{% endblock %}
+{% comment %}{% block albums_active %}active{% endblock %} {% endcomment %}
+{% block javascriptupload %}
+<script type="text/javascript" src="{% static 'account/js/responsiveslides.min.js' %}"></script>
+<script>
+$(function () {
+    $("#slider2").responsiveSlides({
+        //auto: false,
+        pager: true,
+        //speed: 300,
+		speed: 800,
+        maxwidth: 540
+      });
+    });
+    </script>
+{% endblock %}
+{% block cssupload %}
+    <link rel="stylesheet" type="text/css" href="{% static 'account/css/responsiveslides.css' %}"/>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-sm-12 col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-body bimg" style="padding: 20px;">
+                    {% if photo_list %}
+                        <ul class="rslides" id="slider2">
+                        {% for photo_list in photo_list %}
+                          <li><a href="#"><img src="{{ photo_list.album_files.url }}" alt=""></a></li>
+                        {% endfor %}
+                        </ul>
+
+                    {% else %}
+                        <p class="alert alert-danger">Sell Art Product Album Not Available</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="page-header"><h3 class="headstyle text-center">Sell Art Product Details </h3></div>
+                    <div class="form-group" id="list2">
+                            <ol>
+                                <li><p><em>Seller Name</em> {{ prod_list.seller_name }}</p></li>
+                                <li><p><em>Country</em> {{ prod_list.country }}</p></li>
+                                <li><p><em>Product Available</em> {{ prod_list.total_count_product }}</p></li>
+                                 <li><p><em>Price</em>₹&nbsp;{{ prod_list.price|floatformat }}</p></li>
+                                <li><p><em>Delivery Charge</em>₹&nbsp;{{ prod_list.seller_delivery_charge|floatformat }}</p></li>
+                            </ol>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

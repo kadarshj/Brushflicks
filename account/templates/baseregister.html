@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Simple is Better Than Complex{% endblock %}</title>
+  {% load staticfiles %}
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Satisfy">
+   <link rel="stylesheet" type="text/css" href="{% static 'account/css/style.css' %}">
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic|Oswald:400,300,700' rel='stylesheet' type='text/css'>
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,700,800' rel='stylesheet' type='text/css'>
+   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+  </head>
+  <body class="animatedBackground">
+
+  <div class="login-form">
+			<!-- <div class="close-2"> </div> -->
+					<!-- <div class="head"> -->
+					<!-- </div> -->
+					<div class="head-info">
+						<h1 style="font-family: 'Satisfy', cursive">Brushflick</h1>
+						<h2>Hello and Welcome! Tell us a bit about you</h2>
+					</div>
+				<form method="post">
+                <p align="center">{% block err %}
+                        {% endblock %}</p> </br>
+                {% block reg %}
+                {% endblock %}
+				</form>
+				<div class="social-icons">
+							<div class="but-bottom">
+							<a href="{% url 'password_reset' %}" class="account"><p>Forgot your password?</p></a>
+							<a href="{% url 'login' %}" class="trouble"><p>Already Member login Here?</p></a><div class="clear"> </div></div>
+							<a href="#" class="social-account"><h3>or sign in with social account</h3></a>
+							<a href="{% url 'social:begin' 'facebook' %}"><ul class="facebook">
+								<li><img src="{% static 'account/images/fb.png' %}" />Facebook</li>
+							</ul></a>
+
+							<a href="{% url 'social:begin' 'google-oauth2' %}"><ul class="google-plus">
+								<li><img src="{% static 'account/images/gp.png' %}" />Google +</li>
+							</ul></a>
+
+							<div class="clear"> </div>
+				</div>
+				<!-- <div class="social-icons-1"> -->
+							<!-- <a href="#"><ul class="twitter"> -->
+								<!-- <li><img src="images/tw.png" />Twitter</li> -->
+							<!-- </ul></a> -->
+							<!-- <a href="#"><ul class="linkedIn"> -->
+								<!-- <li><img src="images/ln.png" />LinkedIn</li> -->
+							<!-- </ul></a> -->
+							<!-- <div class="clear"> </div> -->
+				<!-- </div> -->
+			</div>
+
+  {% comment %}
+    <header>
+      <h1>My Site</h1>
+      {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">logout</a>
+      {% else %}
+        <a href="{% url 'login' %}">login</a> / <a href="{% url 'signup' %}">signup</a>
+      {% endif %}
+      <hr>
+    </header>
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>{% endcomment %}
+  </body>
+</html>

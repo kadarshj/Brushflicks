@@ -1,0 +1,79 @@
+{% extends 'basedash.html' %}
+{% block title %}Cart Details{% endblock %}
+{% comment %}{% block albums_active %}active{% endblock %} {% endcomment %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-sm-12 col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="page-header"><h3 class="headstyle text-center">Payment Checkout Form</h3></div>
+                    <form class="form-horizontal" role="form" name="payuForm" action="{{ action }}" method="post">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                           <div class="col-sm-10">
+                        <input type="hidden" name="key" value="{{ MERCHANT_KEY }}" />
+                        <input type="hidden" name="hash_string" value="{{ hash_string }}" />
+                        <input type="hidden" name="hash" value="{{ hashh }}"/>
+                        <input type="hidden" name="posted" value="{{ posted }}"/>
+                        <input type="hidden" name="txnid" value="{{ posted.txnid }}" />
+                        <input type="hidden" name="amount" value="{{ posted.amount|default:'' }}" />
+                        <input  type="hidden" name="surl" value="{{ posted.surl }}" size="64"/>
+                        <input  type="hidden" name="furl" value="{{ posted.furl }}" size="64"/>
+                        <input  type="hidden" name="service_provider" value="" size="64">
+                           </div>
+                         </div>
+
+
+
+            <div class="form-group">
+                           <label class="control-label col-sm-2" for="song_title">
+                                     <label for="id_art_type">Confirm Name:</label>
+                          </label>
+                           <div class="col-sm-10">
+                                 <input name="firstname" id="firstname" value="{{ posted.firstname|default:'' }}" required="" />
+                           </div>
+                       </div>
+
+          <div class="form-group">
+                           <label class="control-label col-sm-2" for="song_title">
+                                     <label for="id_art_type">Confirm Email:</label>
+                          </label>
+                           <div class="col-sm-10">
+                                 <input name="email" id="email" value="{{ posted.email|default:'' }}" required="" />
+                           </div>
+                       </div>
+
+            <div class="form-group">
+                           <label class="control-label col-sm-2" for="song_title">
+                                     <label for="id_art_type">Confirm Phone Number:</label>
+                          </label>
+                           <div class="col-sm-10">
+                                 <input name="phone" value="{{ posted.phone|default:'' }}" required="" />
+                           </div>
+                       </div>
+
+                           <div class="form-group">
+                           <div class="col-sm-10">
+                               <textarea style='display:none;' name="productinfo">{{ posted.productinfo|default:'' }}</textarea>
+                           </div>
+                         </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success" value="submit">Payment</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

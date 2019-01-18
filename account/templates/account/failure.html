@@ -1,0 +1,26 @@
+{% extends 'basedash.html' %}
+{% block title %}Transaction Failed{% endblock %}
+{% comment %}{% block albums_active %}active{% endblock %} {% endcomment %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+
+    <div class="col-sm-12 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="page-header"><h3 class="headstyle text-center">Your Payment successfull</h3></div>
+                    <div style="display:none">
+   	                  <input type="hidden" name="csrfmiddlewaretoken" value="{% csrf_token %}">
+                    </div>
+                    <h4 class="alert alert-danger">Transaction Failed.</h4>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+</div>
+
+{% endblock %}

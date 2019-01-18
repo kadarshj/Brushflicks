@@ -1,0 +1,32 @@
+{% extends 'basedash.html' %}
+
+{% block title %}Profile Details{% endblock %}
+{% comment %}{% block albums_active %}active{% endblock %} {% endcomment %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-sm-12 col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                <h1><img src="{{ userprofile.my_pic.url }}"></h1>
+                <h2>{{ userprofile.first_name }}</h2>
+                    {% for image in usersample %}
+                        {% if  image.sample_file.url  %}
+                            <div class="niceimg">
+                    <a class="chocolat-image" href="{{ image.sample_file.url }}">
+                        <img src="{{ image.sample_file.url }}">
+                        </a></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+

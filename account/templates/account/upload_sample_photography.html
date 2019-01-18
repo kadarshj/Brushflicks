@@ -1,0 +1,76 @@
+{% extends 'basedash.html' %}
+{% load staticfiles %}
+{% block javascriptcssupload %}
+    <link rel="stylesheet" type="text/css" href="{% static 'account/css/dropzone.css' %}"/>
+{% endblock %}
+{% block javascriptupload %}
+    <script type="text/javascript" src="{% static 'account/js/dropzone.js' %}"></script>
+{% endblock %}
+
+
+{% block title %}Photography Image Samples{% endblock %}
+{% comment %}{% block albums_active %}active{% endblock %} {% endcomment %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-sm-12 col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="page-header"><h3 class="headstyle text-center">Add Photography Image Samples</h3></div>
+                    {% ifequal instance.i_like_being 'photography' %}
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <form class="dropzone form-horizontal" role="form" id="myDropzone" action="{% url 'postphoto' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% include 'account/form_template.html' %}
+
+                    </form>
+                    {% endifequal %}
+                </div>
+            </div>
+        </div>
+
+    <div class="col-sm-12 col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Upload your photography image sample by select all image or by drag and drop.</h3>
+                    <p>You can preview image here only if uploaded.</p>
+                    <p>This sample necessary so that recruiter as well as other users can see your skills and capability.</p>
+                    <p> Accepts only file with extension .png,.jpg,.gif,.bmp,.jpeg</p>
+                    <p>Please select files by cntrl + mouse click</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+{% block filezone %}
+    <script>
+    Dropzone.options.myDropzone ={
+            paramName: "sample_file", // name of input
+            autoProcessQueue : true,
+            parallelUploads: 1,
+            acceptedFiles: ".png,.jpg,.gif,.bmp,.jpeg",
+            maxFiles: 5,
+            maxFilesize: 2,//MB
+
+            init :  function (){
+                this.on( "success", function( file, responseText){
+                    // event launched at the end of uploading images queued
+                    console.log( responseText );
+                });
+
+                myDropzone.on("complete", function(file) {
+                myDropzone.removeFile(file);
+});
+            }
+        };
+    </script>
+{% endblock %}

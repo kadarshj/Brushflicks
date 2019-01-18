@@ -1,0 +1,55 @@
+{% extends 'basedash.html' %}
+{% block title %}Sell a New Art{% endblock %}
+{% comment %}{% block albums_active %}active{% endblock %} {% endcomment %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-sm-12 col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Sell a New Art</h3>
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <form class="form-horizontal" role="form" action="{% url 'sellartshare' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% include 'account/form_template.html' %}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>What is Brushflick Sell Art?</h3>
+                    <p>Brushflick is an app that allows you to sell artistic creativity on the cloud so that everyone can admire and can buy.</p>
+                    <h3>How do I Sell Art?</h3>
+                    <p>First, create a new Art by filling out the form on this page. Once an Art card is created you will be directed to respective page.</p>
+                    <h3>Sell art instructions.</h3>
+                    <p>Please fill all the fields carefully and please give correct information required for further communication.</p>
+                    <h3>Total count product? </h3>
+                    <p>Number of same art product you can sell maximum.</p>
+                    <h3>What are some Art cover logo best practices?</h3>
+                    <ul>
+                        <li>Have a resolution of 512x512</li>
+                        <li>Use common image formats such as .JPG, .GIF, or .PNG</li>
+                        <li>Remain under the 2MB limit.</li>
+                        <li>Square images look best</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

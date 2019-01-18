@@ -1,0 +1,136 @@
+{% extends 'basedash.html' %}
+{% load staticfiles %}
+{% block title %}Hire{% endblock %}
+{% block post_job %}active{% endblock %}
+{% block post_jobb %}active{% endblock %}
+
+
+{% block body %}
+
+<section class="container">
+<div class="container-fluid art-container">
+  <div class="page-header"><h3 class="headstyle text-center">Recruiter Hiring Post</h3></div>
+    <!-- Albums -->
+    <div class="row homepadding">
+        {% if hirelist %}
+            {% for hirelist in hirelist %}
+
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+            <article class="material-card Red">
+                <h2>
+                    <span>Require {{ hirelist.hiring_skill }} <form style="border: none;padding: 0%;width: 0%;display: inline-block;" method="post" action="{% url 'hiredetail' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="hire_post_id" value="{{ hirelist.id }}" />
+                        <input type="hidden" name="user_id" value="{{ user_id }}"/>
+                        <button type="submit" style="border: none;background: none !important;padding: 0! important;outline: inherit !important;"><i class="fa fa-info-circle" style="color: #ffffff;"></i></button></form></span>
+                    <strong>
+                       From&nbsp;{{ hirelist.country }}
+                            <i class="fa fa-fw fa-mail-forward active"></i>
+                        <i  style="font-weight: 300;font-size: .8em">{{ hirelist.count_apply }}</i>
+                            <i class="fa fa-fw fa-eye active"></i>
+                        <i  style="font-weight: 300;font-size: .8em">{{ hirelist.count_view }} </i>
+                    </strong>
+                </h2>
+                <div class="mc-content">
+                    <div class="img-container niceimg">
+                        <img class="img-responsive" src="{{ hirelist.cover_logo.url }}" style="height: 100%; width: 100%;">
+                    </div>
+                    <div class="mc-description">
+                        <p class="alert alert-danger">Total Work Hour: {{ hirelist.total_hour_work }}<br>
+                        Budget: {{ hirelist.budget }}</p>
+                    </div>
+                </div>
+                <a class="mc-btn-action">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <div class="mc-footer">
+                    <h4>
+                        {{ hirelist.hire_post_created }}
+                    </h4>
+                    <a class="fa fa-fw fa-facebook"></a>
+                    <a class="fa fa-fw fa-twitter"></a>
+                    <a class="fa fa-fw fa-linkedin"></a>
+                   <!-- <a class="fa fa-fw fa-google-plus"></a>-->
+                </div>
+            </article>
+        </div>
+
+              {% comment %}  <div class="col-sm-4 col-lg-2">
+                    <div class="thumbnail">
+                        <a href="#">
+                            <img src="{{ artsharelist.cover_logo.url }}" class="img-responsive">
+                        </a>
+                        <div class="caption">
+                            <h2>{{ artsharelist.art_type }}</h2>
+                            <h4>{{ artsharelist.created_by }}</h4>
+                            <h4>{{ artsharelist.created_by }}</h4>
+                            <h4>{{ artsharelist.date }}</h4>
+
+                            <!-- View Details -->
+                            <a href="#" class="btn btn-primary btn-sm" role="button">View Details</a>
+
+                            <!-- Delete Album -->
+                            <form action="#" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="album_id" value="{{ artsharelist.id }}" />
+                                <button type="submit" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </form>
+
+                            <!-- Favorite Album -->
+
+                        </div>
+                    </div>
+                </div> {% endcomment %}
+                {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+            {% endfor %}
+        {% else %}
+            <div class="col-sm-12">
+            <h1>No Card is Added!</h1>
+                {% comment %}<br>
+                <a href="#">
+                    <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus"></span>&nbsp; Add an Album
+                    </button>
+                </a>{% endcomment %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% if hirelist.has_other_pages %}
+  <ul class="pagination">
+    {% if hirelist.has_previous %}
+      <li><a href="?page={{ hirelist.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in hirelist.paginator.page_range %}
+      {% if hirelist.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if hirelist.has_next %}
+      <li><a href="?page={{ hirelist.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+</section>
+   {% comment %} <header>
+        <div class="page-header headstyle text-center"><i class="glyphicon glyphicon-arrow-down" aria-hidden="true"></i></div>
+      {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">logout</a>
+      {% else %}
+        <a href="{% url 'login' %}">login</a> / <a href="{% url 'signup' %}">signup</a>
+      {% endif %}
+      <hr>
+    </header>
+  <h2></h2> {% endcomment %}
+{% endblock %}

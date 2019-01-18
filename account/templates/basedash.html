@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Brushflicks{% endblock %}</title>
+    {% load staticfiles %}
+    <link rel="shortcut icon" type="image/png" href="{%  static 'favicon.ico' %}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{% static 'account/css/styledash.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'account/css/sbimenu.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'account/css/component.css' %}"/>
+    {% block cssupload %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'account/css/chocolat.css' %}"/>
+    {% block profilecss %}{% endblock %}
+    {% block javascriptcssupload %}{% endblock %}
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    {% block javascriptupload %}{% endblock %}
+
+    <script type="text/javascript" src="{% static 'account/js/jquery.chocolat.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'account/js/modernizr.custom.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'account/js/main.js' %}"></script>
+    {% block filezone %}{% endblock %}
+
+    {% comment %} <script type="text/javascript" src="{% static 'account/js/jquery.easing.1.3.js' %}"></script>
+    <script type="text/javascript" src="{% static 'account/js/jquery-3.1.1.min.js' %}"></script>
+    navbar-fixed-top <script src="{% static 'music/js/main.js' %}"></script>
+    {% endcomment %}
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top" style="color: #EF5350;">
+    <div class="container-fluid">
+
+        <!-- Header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'home' %}">Brushflick</a>
+        </div>
+
+        <!-- Items -->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+                <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search" method="get" action="">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="q" value="{{ request.GET.q }}">
+                </div>
+                <button type="submit" class="btn btn-default">Search</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="{% block post_active %}{% endblock %}">
+                    <a href="{% url 'creativetype' %}">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Post
+                    </a>
+                </li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                <!--<li><a href="#"><span class="fa fa-info-circle"></span></a>
+                    <a href="">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                    </a>
+                </li>-->
+            <li class="dropdown {% block post_home %}{% endblock %}">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-paint-brush"></span>&nbsp;Artist<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li class="act {% block post_homee %}{% endblock %}"><a href="{% url 'home' %}"><span class="fa fa-share-square-o"></span>&nbsp;&nbsp;Share Art</a></li>
+            <li class="divider"></li>
+            <li class="act {% block post_homeee %}{% endblock %}"><a href="{% url 'sellhome' %}"><span class="fa fa-money"></span>&nbsp;&nbsp;Sell Art</a></li>
+          </ul>
+        </li>
+
+            <li>&nbsp;&nbsp;</li>
+             <li class="dropdown {% block post_job %}{% endblock %}">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-briefcase"></span>&nbsp;Job Hiring<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li class="act {% block post_jobb %}{% endblock %}"><a href="{% url 'hirehome' %}"><span class="fa fa-briefcase"></span>&nbsp;&nbsp;Hire</a></li>
+            <li class="divider"></li>
+            <li class="act {% block post_jobbb %}{% endblock %}"><a href="{% url 'gethirehome' %}"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Get Hired</a></li>
+          </ul>
+        </li>
+
+            {% comment %}
+            <li>&nbsp;&nbsp;</li>
+             <li class="dropdown {% block post_writer %}{% endblock %}">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-pencil"></span>&nbsp;Writer<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#"><span class="fa fa-share-square-o"></span>&nbsp;&nbsp;Share Story</a></li>
+            <li class="divider"></li>
+            <li><a href="#"><span class="fa fa-money"></span>&nbsp;&nbsp;Sell Story</a></li>
+          </ul>
+        </li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li class="dropdown {% block post_photo %}{% endblock %}">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-photo"></span>&nbsp;Photography<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#"><span class="fa fa-share-square-o"></span>&nbsp;&nbsp;Share Photo</a></li>
+            <li class="divider"></li>
+            <li><a href="#"><span class="fa fa-money"></span>&nbsp;&nbsp;Sell Photo</a></li>
+          </ul>
+        </li>
+         <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li class="dropdown {% block post_enthusiast %}{% endblock %}">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-smile-o"></span>&nbsp;Enthusiast<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#"><span class="fa fa-share-square-o"></span>&nbsp;&nbsp;Share Photo</a></li>
+            <li class="divider"></li>
+            <li><a href="#"><span class="fa fa-share-square-o"></span>&nbsp;&nbsp;Share Video</a></li>
+          </ul>
+        </li>{% endcomment %}
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Account <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+              {% block profile_user_id %}{% endblock %}
+              <li><a href="{% url 'savedcard' %}"><span class="fa fa-flag"></span>&nbsp;&nbsp;Saved Card</a></li>
+              <li><a href="{% url 'contact' %}"><span class="fa fa-envelope-o"></span>&nbsp;&nbsp;Contact</a></li>
+              <li><a href="{% url 'symbol' %}"><span class="fa fa-book"></span>&nbsp;&nbsp;Symbols</a></li>
+          <!--  <li><a href="#"><span class="fa fa-cogs"></span>&nbsp;&nbsp;Card Settings</a></li>-->
+            <li class="divider"></li>
+            <li><a href="{% url 'logout' %}"><span class="fa fa-power-off"></span>&nbsp;&nbsp;Logout</a></li>
+          </ul>
+        </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+{% block body %}
+{% endblock %}
+<script type="text/javascript" src="{% static 'account/js/toucheffects.js' %}"></script>
+{% block timescript %} {% endblock %}
+</body>
+</html>

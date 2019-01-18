@@ -1,0 +1,147 @@
+{% extends 'basedash.html' %}
+{% block title %}Cart Details{% endblock %}
+{% comment %}{% block albums_active %}active{% endblock %} {% endcomment %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-sm-12 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="page-header"><h3 class="headstyle text-center">Please Fill Delivery Details</h3></div>
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <form class="form-horizontal"  role="form" action="{% url 'payment' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group" id="addinput">
+                        </div>
+                        <div class="form-group">
+                           <label class="control-label col-sm-2" for="song_title">
+                                     <label for="id_art_type">Name:</label>
+                          </label>
+                           <div class="col-sm-10">
+                                 <input  name="firstname" maxlength="250" required="" type="text">
+                           </div>
+                       </div>
+
+                        <div class="form-group">
+                           <label class="control-label col-sm-2" for="song_title">
+                                     <label for="id_art_type">Street Address:</label>
+                          </label>
+                           <div class="col-sm-10">
+                                 <input  name="shipping_street_address" maxlength="250" required="" type="text">
+                           </div>
+                       </div>
+
+                        <div class="form-group">
+                           <label class="control-label col-sm-2" for="song_title">
+                                     <label for="id_art_type">Country:</label>
+                          </label>
+                           <div class="col-sm-10">
+                                 <input  name="shipping_country" maxlength="250" required="" type="text">
+                           </div>
+                       </div>
+
+                        <div class="form-group">
+                           <label class="control-label col-sm-2" for="song_title">
+                                     <label for="id_art_type">State:</label>
+                          </label>
+                           <div class="col-sm-10">
+                                 <input  name="shipping_state" maxlength="250" required="" type="text">
+                           </div>
+                       </div>
+
+                        <div class="form-group">
+                           <label class="control-label col-sm-2" for="song_title">
+                                     <label for="id_art_type">City:</label>
+                          </label>
+                           <div class="col-sm-10">
+                                 <input  name="shipping_city" maxlength="250" required="" type="text">
+                           </div>
+                       </div>
+
+                        <div class="form-group">
+                           <label class="control-label col-sm-2" for="song_title">
+                                     <label for="id_art_type">Pincode:</label>
+                          </label>
+                           <div class="col-sm-10">
+                                 <input  name="shipping_pincode" maxlength="250" required="" type="number">
+                           </div>
+                       </div>
+
+                        <div class="form-group">
+                           <label class="control-label col-sm-2" for="song_title">
+                                     <label for="id_art_type">Mobile:</label>
+                          </label>
+                           <div class="col-sm-10">
+                                 <input  name="phone" maxlength="250" required="" type="number">
+                           </div>
+                       </div>
+
+                        <div class="form-group">
+                           <label class="control-label col-sm-2" for="song_title">
+                                     <label for="id_art_type">Email:</label>
+                          </label>
+                           <div class="col-sm-10">
+                                 <input  name="email" maxlength="250" required="" type="email">
+                           </div>
+                       </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+    <div class="col-sm-12 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="page-header"><h3 class="headstyle text-center">Please Fill Data Correctly</h3></div>
+                    <p>All information is required.</p>
+                    <p>In failing to fill correct data delivery will not be possible.</p>
+                    <p>Please check before submitting.</p>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+</div>
+
+{% endblock %}
+
+{% block timescript %}
+    <script>
+    var lists = localStorage['listToPass'];
+    //alert(JSON.stringify(lists));
+    //alert(lists);
+    var lists = jQuery.parseJSON(lists);
+
+    console.log(lists)
+    console.log(lists.length)
+    var i = 0;
+    attrid = []
+    attrquantity = []
+    $("#addinput").append("<input type='hidden' name='amount' value='"+ lists[0].total_price +"'>");
+    $("#addinput").append("<textarea style='display:none;' name='productinfo'>"+ lists[0].name +"</textarea>");
+    while(i < lists.length){
+        //alert('i am here');
+        attrid[i] = lists[i].id;
+        attrquantity[i] = lists[i].quantity;
+        $("#addinput").append("<input type='hidden' name='artsell_id' value="+attrid[i]+">");
+        $("#addinput").append("<input type='hidden' name='quantity' value="+attrquantity[i]+">");
+        i++;
+    }
+    console.log(lists)
+    //localStorage.removeItem( 'listToPass' );
+    </script>
+{% endblock %}

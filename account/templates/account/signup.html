@@ -1,0 +1,56 @@
+{% extends 'baseregister.html' %}
+{% block title %}Sign Up{% endblock %}
+
+{% block err %}
+    {% for field in form %}
+        {% for error in field.errors %}
+          <p class=" label label-danger">{{ error }}</p>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
+
+{% block reg %}
+
+    {% csrf_token %}
+
+    <li>
+<input id="id_email" placeholder="Email" name="email" maxlength="254" autofocus="" required="" type="email" style="background-color:#f0f0f0;border:0px;-webkit-box-shadow:none;box-shadow:none;position:relative;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;border-radius:3px;font-weight:bold;padding:10px;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;color:#333;font-size:14px;outline:none;">
+</li>
+<li>
+<input id="id_password1" placeholder="Password" name="password1" required="" type="password" style="background-color:#f0f0f0;border:0px;-webkit-box-shadow:none;box-shadow:none;position:relative;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;border-radius:3px;font-weight:bold;padding:10px;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;color:#333;font-size:14px;outline:none;-webkit-transition:opacity 0.5s linear;transition:opacity 0.5s linear;display:flex;opacity:1;align-items:center;justify-content:space-between;height:100%;">
+</li>
+<li>
+<input id="id_password2" placeholder="Confirm Password Again" name="password2" required="" type="password" style="background-color:#f0f0f0;border:0px;-webkit-box-shadow:none;box-shadow:none;position:relative;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;border-radius:3px;font-weight:bold;padding:10px;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;color:#333;font-size:14px;outline:none;-webkit-transition:opacity 0.5s linear;transition:opacity 0.5s linear;display:flex;opacity:1;align-items:center;justify-content:space-between;height:100%;">
+</li>
+
+    <div class="p-container">
+								<input type="submit" value="SIGN UP" >
+							<div class="clear"> </div>
+					</div>
+
+{% endblock %}
+
+
+
+
+{% comment %}{% extends 'test.html' %}
+
+{% block content %}
+  <h2>Sign up</h2>
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+          <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <button type="submit">Sign up</button>
+  </form>
+{% endblock %} {% endcomment %}

@@ -1,0 +1,134 @@
+{% extends 'basedash.html' %}
+{% load staticfiles %}
+{% block title %}Saved Cards{% endblock %}
+{% block post_home %}active{% endblock %}
+{% block post_homee %}active{% endblock %}
+
+{% block body %}
+
+<section class="container">
+<div class="container-fluid art-container">
+  <div class="page-header"><h3 class="headstyle text-center">Saved Art Cards</h3></div>
+    <!-- Albums -->
+    <div class="row homepadding">
+        {% if artlikedlist %}
+            {% for artlikedlist in artlikedlist %}
+
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+            <article class="material-card Red">
+                <h2>
+                    <span>{{ artlikedlist.art.art_type }}
+                    </span>
+                    <strong>
+                       by&nbsp;{{ artlikedlist.art.created_by }}
+                        <form style="border: none;padding: 0%;width: 0%;display: inline-block;" method="post" action="{% url 'saveddelete' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="art_id" value="{{ artlikedlist.art_id }}" />
+                        <input type="hidden" name="user_id" value="{{ artlikedlist.user_id }}"/>
+                        <button type="submit" style="border: none;background: none !important;padding: 0! important;outline: inherit !important;"><i class="fa fa-trash active"></i></button></form>
+                    </strong>
+                </h2>
+                <div class="mc-content">
+                    <div class="niceimg" data-chocolat-title="{{ artlikedlist.art.art_type }}">
+                    <a class="chocolat-image" href="{{ artlikedlist.art.cover_logo.url }}">
+                    <div class="img-container" >
+                        <img class="img-responsive" src="{{ artlikedlist.art.cover_logo.url }}" style="height: 100%; width: 100%;">
+                    </div></a></div>
+                    <div class="mc-description">
+                        {{ artlikedlist.art.description }}
+                    </div>
+                </div>
+                <a class="mc-btn-action">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <div class="mc-footer">
+                    <h4>
+                        {{ artlikedlist.art.date }}
+                    </h4>
+                    <a class="fa fa-fw fa-facebook"></a>
+                    <a class="fa fa-fw fa-twitter"></a>
+                    <a class="fa fa-fw fa-linkedin"></a>
+                   <!-- <a class="fa fa-fw fa-google-plus"></a>-->
+                </div>
+            </article>
+        </div>
+
+              {% comment %}  <div class="col-sm-4 col-lg-2">
+                    <div class="thumbnail">
+                        <a href="#">
+                            <img src="{{ artsharelist.cover_logo.url }}" class="img-responsive">
+                        </a>
+                        <div class="caption">
+                            <h2>{{ artsharelist.art_type }}</h2>
+                            <h4>{{ artsharelist.created_by }}</h4>
+                            <h4>{{ artsharelist.created_by }}</h4>
+                            <h4>{{ artsharelist.date }}</h4>
+
+                            <!-- View Details -->
+                            <a href="#" class="btn btn-primary btn-sm" role="button">View Details</a>
+
+                            <!-- Delete Album -->
+                            <form action="#" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="album_id" value="{{ artsharelist.id }}" />
+                                <button type="submit" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </form>
+
+                            <!-- Favorite Album -->
+
+                        </div>
+                    </div>
+                </div> {% endcomment %}
+                {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+            {% endfor %}
+        {% else %}
+            <div class="col-sm-12">
+            <h1>No Card is Added!</h1>
+                {% comment %}<br>
+                <a href="#">
+                    <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus"></span>&nbsp; Add an Album
+                    </button>
+                </a>{% endcomment %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% if artlikedlist.has_other_pages %}
+  <ul class="pagination">
+    {% if artsharelist.has_previous %}
+      <li><a href="?page={{ artlikedlist.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in artlikedlist.paginator.page_range %}
+      {% if artlikedlist.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if artlikedlist.has_next %}
+      <li><a href="?page={{ artlikedlist.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+</section>
+   {% comment %} <header>
+        <div class="page-header headstyle text-center"><i class="glyphicon glyphicon-arrow-down" aria-hidden="true"></i></div>
+      {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">logout</a>
+      {% else %}
+        <a href="{% url 'login' %}">login</a> / <a href="{% url 'signup' %}">signup</a>
+      {% endif %}
+      <hr>
+    </header>
+  <h2></h2> {% endcomment %}
+{% endblock %}

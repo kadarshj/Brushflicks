@@ -1,0 +1,90 @@
+{% extends 'basedash.html' %}
+{% block title %}Apply From Here{% endblock %}
+{% block post_job %}active{% endblock %}
+{% block post_jobb %}active{% endblock %}
+{% comment %}{% block albums_active %}active{% endblock %} {% endcomment %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+
+         <div class="col-sm-12 col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Apply For Job</h3>
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <form class="form-horizontal" role="form" action="{% url 'hiredetail' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% include 'account/form_template.html' %}
+                        <input type="hidden" name="hire_post_id" value="{{ hire_post_id }}" />
+                        <input type="hidden" name="user_id" value="{{ user_id }}"/>
+                        <input type="hidden" name="count_view" value="{{ count_view }}"/>
+                        <input type="hidden" id="date_id" name="date" value=""/>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success {% ifequal user_id hire_obj.user_id %}disabled{% endifequal %}">Apply</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+         <div class="col-sm-12 col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="page-header"><h3 class="headstyle text-center">Recruiter Requirement Details</h3></div>
+                     <div class="form-group" id="list2">
+                            <ol>
+                                <li><p><em>Skill Requirement</em> {{ hire_obj.hiring_skill }}</p></li>
+                                <li><p><em>Country</em> {{ hire_obj.country }}</p></li>
+                                <li><p><em>Total Work Hours</em> {{ hire_obj.total_hour_work }}</p></li>
+                                 <li><p><em>Budget</em> {{ hire_obj.budget }}</p></li>
+                                <li><p><em>Skill Description</em> {{ hire_obj.skill_description }}</p></li>
+                            </ol>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-sm-12 col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Apply if you interested from here!</h3>
+                    <p>Please fill all details in the form here and apply.</p>
+                    <p>Please write remark why this job interest you?</p>
+                    <p>Please fill correct email id and phone number so that recruiter can contact you.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+{% block timescript %}
+<script type="text/javascript">
+var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var n = new Date();
+var y = n.getFullYear();
+var m = n.getMonth();
+var d = n.getDate();
+
+  var hours = n.getHours();
+  var minutes = n.getMinutes();
+  var ampm = hours >= 12 ? 'pm' : 'am';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  var strTime = hours + ':' + minutes + ' ' + ampm;
+  var date_val = d + " " + months[m] + " " + y + " " + strTime;
+  $("input[name='date']").val(date_val);
+</script>
+{% endblock %}
+

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block err %}
+        {% if form.errors %}
+                    <p class="h6 label label-danger small">
+                        Your email and password didn't match.
+                        Please try again.
+                    </p>
+                {% endif %}
+    {% endblock %}
+{% block content %}
+  <!--<h2>Login</h2>-->
+  <!--<form method="post">-->
+    {% csrf_token %}
+
+     <!-- <p>
+<label for="id_username">Email address:</label>
+<input id="id_username" name="username" autofocus="" maxlength="254" required="" type="text">
+</p>
+<p>
+<label for="id_password">Password:</label>
+<input id="id_password" name="password" required="" type="password">
+</p> -->
+
+                   <li>
+                      <input type="text" id="id_username" name="username" autofocus="" maxlength="254" required="" placeholder="Email" value="" style="background-color:#f0f0f0;border:0px;-webkit-box-shadow:none;box-shadow:none;position:relative;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;border-radius:3px;font-weight:bold;padding:10px;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;color:#333;font-size:14px;outline:none;">
+						<!-- <a href="#" class=" icon mail"></a> -->
+					</li>
+					<li>
+                        <input id="id_password" name="password" required="" type="password" placeholder="password" value="" style="background-color:#f0f0f0;border:0px;-webkit-box-shadow:none;box-shadow:none;position:relative;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;border-radius:3px;font-weight:bold;padding:10px;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;color:#333;font-size:14px;outline:none;-webkit-transition:opacity 0.5s linear;transition:opacity 0.5s linear;display:flex;opacity:1;align-items:center;justify-content:space-between;height:100%;">
+						<!-- <a href="#" class=" icon lock"></a> -->
+					</li>
+
+    {% comment %}
+      {{ form.as_p }} {% endcomment %}
+    <div class="p-container">
+								<input type="submit" value="SIGN IN" >
+							<div class="clear"> </div>
+					</div>
+   <!-- <button type="submit">Login</button>-->
+ <!-- </form> -->
+{% endblock %}

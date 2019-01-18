@@ -1,0 +1,29 @@
+{% extends 'basedash.html' %}
+{% block title %}Transaction Successfull{% endblock %}
+{% comment %}{% block albums_active %}active{% endblock %} {% endcomment %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+
+    <div class="col-sm-12 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="page-header"><h3 class="headstyle text-center">Your Payment successfull</h3></div>
+                    <div style="display:none">
+   	                  <input type="hidden" name="csrfmiddlewaretoken" value="{% csrf_token %}">
+                    </div>
+                    <h4 class="alert alert-success">Thank You.</h4>
+                    <h4 class="alert alert-success">Your order status is {{ status }}</h4>
+                    <h4 class="alert alert-success">Your Transaction ID for this transaction is {{ txnid }}</h4>
+                     <h4 class="alert alert-success">We have received a payment of Rs {{ amount}}</h4>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'basedash.html' %}
+{% block title %}Add a New Get Hire Card{% endblock %}
+{% comment %}{% block albums_active %}active{% endblock %} {% endcomment %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-sm-12 col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Add a Get Hire Post</h3>
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <form class="form-horizontal" role="form" action="{% url 'gethire' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% include 'account/form_template.html' %}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    <div class="col-sm-12 col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="page-header"><h4 class="headstyle text-center">Fill Profile From Dashboard If You Haven't Yet</h4></div>
+                       <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Profile Require For Recruiter Decision: <a href="#"><i class="fa fa-fw fa-smile-o active" style="font-size: x-large;"></i></a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>What is Brushflick Get Hire?</h3>
+                    <p>Brushflick is an app that allows you to post a get hire your creativity professional on the cloud so that everyone can view & can get chance to hire you. it's important to fill your profile & sample of your work.</p>
+                    <h3>How do I Post Get Hire?</h3>
+                    <p>First, create a new Get Hire post by filling out the form on this page. Once a Get Hire card is created you will be directed to respective page.</p>
+                    <h3>What are some Get Hire post best practices?</h3>
+                    <ul>
+                        <li>Proper selection of skill want to get hired for.</li>
+                        <li>Total hourly charges defined properly.</li>
+                        <li>Personal details mention work related. Your inspiration & reason for it.</li>
+                        <li>Email ID & Phone Number should be correct.</li>
+                    </ul>
+                    <h3>What are some hire cover logo best practices?</h3>
+                    <ul>
+                        <li>Have a resolution of 512x512</li>
+                        <li>Use common image formats such as .JPG, .GIF, or .PNG</li>
+                        <li>Remain under the 2MB limit.</li>
+                        <li>Square images look best</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

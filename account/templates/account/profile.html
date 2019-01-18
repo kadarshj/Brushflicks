@@ -1,0 +1,250 @@
+{% extends 'basedash.html' %}
+{% load staticfiles %}
+{% block title %}Profile{% endblock %}
+{% comment %}{% block post_job %}active{% endblock %}
+{% block post_jobb %}active{% endblock %}
+{% block albums_active %}active{% endblock %} {% endcomment %}
+{% block profilecss %}
+    <style>
+    @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600);
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+.snip1344 {
+  font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 10px 1%;
+  min-width: 230px;
+  max-width: 315px;
+  width: 100%;
+  color: #ffffff;
+  text-align: center;
+  line-height: 1.4em;
+  background-color: #e53935;
+}
+.snip1344 * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+.snip1344 .background {
+  width: 100%;
+  vertical-align: top;
+  opacity: 0.2;
+  -webkit-filter: grayscale(100%) blur(10px);
+  filter: grayscale(100%) blur(10px);
+  -webkit-transition: all 2s ease;
+  transition: all 2s ease;
+}
+.snip1344 figcaption {
+  width: 100%;
+  padding: 15px 25px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+}
+.snip1344 .profile {
+  border-radius: 50%;
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  max-width: 100px;
+  opacity: 1;
+  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  -webkit-transform: translate(-50%, 0%);
+  transform: translate(-50%, 0%);
+}
+.snip1344 h3 {
+  margin: 0 0 5px;
+  font-weight: 400;
+}
+.snip1344 h3 span {
+  display: block;
+  font-size: 0.6em;
+  color: #f39c12;
+  opacity: 0.75;
+}
+.snip1344 i {
+  padding: 10px 5px;
+  display: inline-block;
+  font-size: 32px;
+  color: #ffffff;
+  text-align: center;
+  opacity: 0.65;
+}
+.snip1344 a {
+  text-decoration: none;
+}
+.snip1344 i:hover {
+  opacity: 1;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+.snip1344:hover .background,
+.snip1344.hover .background {
+  -webkit-transform: scale(1.3);
+  transform: scale(1.3);
+}
+
+      #img1 a{
+    display:none;
+
+}
+#img1 a:first-child{
+    display:block;
+}
+
+     #img2 a{
+    display:none;
+
+}
+#img2 a:first-child{
+    display:block;
+}
+    </style>
+{% endblock %}
+
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+
+         <div class="col-sm-12 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body" style="background-color:#e53935;">
+                    {% if profile.my_pic.name == '/my_image' %}
+                     <figure class="snip1344"><img src="{% static 'account/images/images.png' %}" alt="profile" class="background"/><img src="{% static 'account/images/images.png' %}" alt="profile-sample1" class="profile"/>
+                    {% else %}
+                    <figure class="snip1344"><img src="{{ profile.my_pic.url }}" alt="profile" class="background"/><img src="{{ profile.my_pic.url }}" alt="profile-sample1" class="profile"/>
+                    {% endif %}
+  <figcaption>
+    <h3>{{ profile.first_name }}&nbsp;{{ profile.last_name }}<span>{{ profile.i_like_being }}</span></h3>
+  </figcaption>
+</figure>
+
+                </div>
+            </div>
+        </div>
+
+
+    {% if profile.my_pic.name == '/my_image' %}
+         <div class="col-sm-12 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                         <h3>Please update your profile. Painter is default skill.</h3>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if user_paintpiclist is not True and user_piclist is not True and user_musiclist is not True and user_bandlist is not True and user_bloglist is not True %}
+         <div class="col-sm-12 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                         <h3>Please add some samples of your {{ profile.i_like_being }} profile!</h3>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+
+    {% if user_paintpiclist %}
+         <div class="col-sm-12 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="page-header"><h3 class="headstyle text-center">Painting Album<br>(Click Image To See Album)</h3></div>
+                          <div id="img1" class="niceimg" data-chocolat-title="Paintings">
+                             {% for painting in user_paintpiclist %}
+                             <a class="chocolat-image" href="{{ painting.sample_file.url }}">
+                                 <div class="img-container img-thumbnail" >
+                                 <img class="img-responsive" src="{{ painting.sample_file.url }}">
+                                 </div>
+                             </a>
+                          {% endfor %}</div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if user_piclist %}
+        <div class="col-sm-12 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="page-header"><h3 class="headstyle text-center">Sample Photo Album</h3></div>
+                      <div id="img2" class="niceimg" data-chocolat-title="Paintings">
+                             {% for photo in user_piclist %}
+                             <a class="chocolat-image" href="{{ photo.sample_file.url }}">
+                                 <div class="img-container img-thumbnail" >
+                                 <img class="img-responsive" src="{{ photo.sample_file.url }}">
+                                 </div>
+                             </a>
+                          {% endfor %}</div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+     {% if user_musiclist %}
+        <div class="col-sm-12 col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="page-header"><h3 class="headstyle text-center">Sample Music Songs</h3></div>
+                    {% for music in user_musiclist %}
+                        <ul>
+                        <li style="font-family: Bitstream Vera Sans Mono, Monaco, Courier New, Courier, monospace;font-size: large;color: #EF5350;">
+                       {{ music.sample_file.name }}:&nbsp;
+                            <audio controls style="width: 100%;">
+                                <source src="{{ music.sample_file.url }}" type="audio/mpeg" />
+                                <a href="#">Sample</a>
+                                An html5-capable browser is required to play this audio.
+                            </audio><br></li>
+                        </ul>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+      {% endif %}
+
+      {% if user_bandlist %}
+        <div class="col-sm-12 col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="page-header"><h3 class="headstyle text-center">Sample Band Songs</h3></div>
+                    {% for music in user_bandlist %}
+                        <ul>
+                        <li style="font-family: Bitstream Vera Sans Mono, Monaco, Courier New, Courier, monospace;font-size: large;color: #EF5350;">
+                       {{ music.sample_file.name }}:&nbsp;<audio src="{{ music.sample_file.url }}" controls preload style="background-color: #d50000;"></audio><br></li>
+                        </ul>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+      {% endif %}
+
+        {% if user_bloglist %}
+            {% for blog in user_bloglist %}
+        <div class="col-sm-12 col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="page-header"><h3 class="headstyle text-center">Sample Blog</h3></div>
+                      <h2 style="font-family: Bitstream Vera Sans Mono, Monaco, Courier New, Courier, monospace">{{ blog.blog_name }}</h2>
+                      <h3 style="font-family: Bitstream Vera Sans Mono, Monaco, Courier New, Courier, monospace">{{ blog.datetime }}</h3>
+                      <div style="font-family: Bitstream Vera Sans Mono, Monaco, Courier New, Courier, monospace">
+                          {{ blog.sample_blog|urlize  }}
+                      </div>
+                </div>
+            </div>
+        </div>
+            {% endfor %}
+       {% endif %}
+
+    </div>
+
+</div>
+{% endblock %}
+
+
