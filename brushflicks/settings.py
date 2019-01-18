@@ -170,8 +170,8 @@ LOGIN_REDIRECT_URL = 'home'
 
 
 # Facebook settings
-SOCIAL_AUTH_FACEBOOK_KEY = '208214969752447'
-SOCIAL_AUTH_FACEBOOK_SECRET = '25c84fa3927ef463fd038096f02d0c67'
+SOCIAL_AUTH_FACEBOOK_KEY = '************'
+SOCIAL_AUTH_FACEBOOK_SECRET = '*************'
 
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
@@ -182,8 +182,8 @@ SOCIAL_AUTH_FACEBOOK_AUTH_EXTRA_ARGUMENTS = {
 }
 
 # Google settings
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1056005702584-e56vdn74e7fdjhc1c4h0fmpcju6jluj6.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'nbKoz-p2p4Otzj5Hwu7LcHdq'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '***********'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '***********'
 SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS = {
       # 'access_type': 'offline',
       # 'approval_prompt': 'force',
@@ -192,8 +192,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS = {
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'brushflicks2017@gmail.com'
-EMAIL_HOST_PASSWORD = 'brushflicks@sep9'
+EMAIL_HOST_USER = '************'
+EMAIL_HOST_PASSWORD = '*************'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = 'Brushflicks Team <noreply@brushflicks.com>'
